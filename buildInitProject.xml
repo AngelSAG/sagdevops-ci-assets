@@ -6,26 +6,6 @@
 		<fail message="System property 'SAGHome' should be defined!"/>
 	</target>
 
-	<target name="initDeployerInstallationPath" unless="deployerInstallationPath">
-		<fail message="System property 'deployerInstallationPath' should be defined!"/>
-	</target>
-
-	<target name="initDeployerHost" unless="deployerHost">
-		<fail message="System property 'deployerHost' should be defined!"/>
-	</target>
-	
-	<target name="initDeployerPort" unless="deployerPort">
-		<fail message="System property 'deployerPort' should be defined!"/>
-	</target>
-	
-	<target name="initDeployerUsername" unless="deployerUsername">
-		<fail message="System property 'deployerUsername' should be defined!"/>
-	</target>
-	
-	<target name="initDeployerPassword" unless="deployerPassword">
-		<fail message="System property 'deployerPassword' should be defined!"/>
-	</target>
-			
 	<!-- mandatory properties -->
 	<target name="initProjcetName" unless="projectName">
 		<fail message="Property 'projectName' should be defined!"/>
@@ -38,11 +18,6 @@
 	<target name="initRepositoryName" unless="repositoryName">
 		<fail message="Property 'repositoryName' should be defined!"/>
 	</target>
-	
-	<target name="initDeployerProjectDefinition" unless="deployerProjectDefinition">
-		<fail message="Property 'deployerProjectDefinition' should be defined!"/>
-	</target>
-
 	
 	<!-- optional properties -->
 	<target name="initISProjectsDir" unless="isProjectsDir">
@@ -80,10 +55,10 @@
 
 	
 	<!--Main Init targets-->
-	<target name="initSystemProperties" depends="initSAGHome,initDeployerInstallationPath,initDeployerHost,initDeployerPort,initDeployerUsername,initDeployerPassword">
+	<target name="initSystemProperties" depends="initSAGHome">
 	</target>
 	
-	<target name="initMandatoryProperties" depends="initProjcetName,initBuildOutputDir,initRepositoryName,initDeployerProjectDefinition">
+	<target name="initMandatoryProperties" depends="initProjcetName,initBuildOutputDir,initRepositoryName">
 	</target>
 	
 	<target name="initOptionalProperties" depends="initISProjectsDir,initISConfigDir,initBPMProjectsDir,initMWSProjectsDir,initRulesProjectsDir,initUMProjectDir,initTestPackageNamePattern,initJenkinsReportDir">

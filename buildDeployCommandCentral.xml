@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<project name="DeployCommandCentral" default="deployWM" basedir=".">
+	
+	<target name="addRepoToCC">
+		
+		<cc command="add repository assets flatfile name=${repositoryName} location=${buildOutputDir}" format="tsv"/>
+		
+		<!--cc command="add repository assets flatfile name=${repositoryName} location=${buildOutputDir}" input="build/dist/${repo.asset}.zip" format="tsv" /-->
+		
+		<!--<exec executable="sagcc" failonerror="true" resultproperty="appState">
+			<arg line="add repository assets flatfile name=${repositoryName} location=${buildOutputDir}"/>
+		</exec>
+		
+		<if>			
+		<equals arg1="${appState}" arg2="0" trim="true"/>			
+			<then>
+				<echo message="Command Central Deployer succeeded in registering a new reposity with name ${repositoryName}."/>
+			</then>
+			<else>			    				
+				<fail message="Command Central Deployer failed to register a new reposity with name ${repositoryName}."/>
+			</else>
+		</if> -->		
+	</target>
+	
+	
+	<target name="deployAllToTarget">
+		
+		
+		<cc command="exec provisioning assets ${targetNodeAlias} ${repositoryName} install runtimeComponentId=${targetRuntimeId} artifacts=ALL includeHeaders=false properties=id"/>
+        
+		
+		<!--		
+		<cc command="exec templates composite apply acho"/>
+		<exec executable="sagcc" failonerror="true" resultproperty="appState">
+			<arg line="exec provisioning assets ${targetNodeAlias} ${repositoryName} install runtimeComponentId=${targetRuntimeId} artifacts=ALL"/>
+		</exec>
+		
+		<if>			
+		<equals arg1="${appState}" arg2="0" trim="true"/>			
+			<then>
+				<echo message="Command Central Deployer successfully finished deployment."/>
+			</then>
+			<else>			    				
+				<fail message="Command Central Deployer deployment failed."/>
+			</else>
+		</if> -->		
+	</target> 	  
+	
+	<target name="deployWM" depends="addRepoToCC, deployAllToTarget"/>
+
+</project>

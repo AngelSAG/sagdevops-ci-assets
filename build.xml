@@ -1,29 +1,36 @@
 <?xml version="1.0"?>
 <project name="Build and Deploy Solution" default="buildDeployTest" basedir="." >
+    <!-- import antcc -->
+	<import file="antcc/main.xml" />
+
+	
+	
 	<property file="${project.properties}"/>
 	<property file="System.properties"/>
         
+	
+	
 	<import file="buildInitProject.xml"/>
 	<import file="buildCallABE.xml"/>
-	<import file="buildDeployer.xml"/>
+	<import file="buildDeployCommandCentral.xml"/>
 	<import file="buildTest.xml"/>
 	
 
 	<taskdef classpath="lib/ant-contrib.jar" resource="net/sf/antcontrib/antlib.xml"/>
 				
-	<target name="build" depends="initProject,buildWM">		
+	<target name="build" depends="sagccInit,initProject,buildWM">		
 		<description>Build project.</description>
 	</target>
 		
-	<target name="deploy" depends="initProject,deployWM">
+	<target name="deploy" depends="sagccInit,initProject,deployWM">
 		<description>Deploy project.</description>
 	</target>
 
-        <target name="test" depends="initProject,startTest">
+    <target name="test" depends="sagccInit,initProject,startTest">
 		<description>Run tests.</description>
 	</target>	
 	
-	<target name="buildDeployTest" depends="build, deploy, test">
+	<target name="buildDeployTest" depends="sagccInit, build, deploy, test">
 		<description>Build and deploy the project.</description>
 	</target>
 </project>
